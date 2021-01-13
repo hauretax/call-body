@@ -1,0 +1,33 @@
+{
+  "name": "call-body",
+  "version": "1.0.0",
+  "description": "call-body",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.10",
+    "mongoose-unique-validator": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "server": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hauretax/call-body.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hauretax/call-body/issues"
+  },
+  "homepage": "https://github.com/hauretax/call-body#readme"
+}
