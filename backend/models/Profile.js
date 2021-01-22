@@ -11,6 +11,9 @@ const ProfileSchema = mongoose.Schema({
     caloGoal: {type: Number, required: false},
     weight: {type: Object, require: false},
     calo: {type: Object, require: false},
+    tauxg: {type: Number, require: false},
+    multa: {type: Number, require: false},
+    pertp: {type: Number, require: false},
 });
 
 ProfileSchema.plugin(uniqueValidator);

@@ -5,14 +5,14 @@ exports.modifyUser = (req, res, next) =>{
   console.log('yooo' + req.body.nb + req.body.param);
   switch(req.body.param){
     case 'goal':   {
-      Profile.updateOne({ email: req.body.email}, 
+      Profile.updateOne({ _id: req.body.userId}, 
         {goal: req.body.nb})
       .then(() => res.status(200).json({message: 'objet modifier'}))
       .catch(error => res.status(400).json({ error }))
       break;
     }
     case 'calo':{
-      Profile.updateOne({ email: req.body.email}, 
+      Profile.updateOne({ _id: req.body.userId}, 
         {calo: req.body.nb})
       .then(() => res.status(200).json({message: 'objet modifier'}))
       .catch(error => res.status(400).json({ error }))

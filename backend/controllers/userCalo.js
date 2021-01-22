@@ -15,7 +15,7 @@ exports.addCalo = (req, res, next) => {
           .catch(error => console.log(error) )
         }
       else
-        Profile.findOneAndUpdate( //je set la premier calorie du jours
+        Profile.updateOne( //je set la premier calorie du jours
           { email: req.body.email }, 
           { $push: {calo: {"date" : now,"calo" : Number(req.body.calo)}}})
           .then(() => res.status(200).json('poids ajouter'))
