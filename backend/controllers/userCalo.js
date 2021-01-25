@@ -3,7 +3,7 @@ const date = require('../tools/getDate');
 
 exports.addCalo = (req, res, next) => {
   let now = date.getDate();
-  Profile.findOne( { email: req.body.email, calo: {$elemMatch: {date: now}} })
+  Profile.findOne( { _id: req.body.userId, calo: {$elemMatch: {date: now}} })
   .then(function(profile){
       console.log('['+profile+']')
       if(profile){
@@ -15,9 +15,10 @@ exports.addCalo = (req, res, next) => {
           .catch(error => console.log(error) )
         }
       else
+      console.log('')
         Profile.updateOne( //je set la premier calorie du jours
           { email: req.body.email }, 
-          { $push: {calo: {"date" : now,"calo" : Number(req.body.calo)}}})
+          { $set: {calo: {"date" : now,"calo" : Number(req.body.calo)}}})
           .then(() => res.status(200).json('poids ajouter'))
           .catch(error => res.status(404).json({ error }))
     })
@@ -27,6 +28,6 @@ exports.addCalo = (req, res, next) => {
 exports.showcalo = (req, res, next) => {
   console.log(req.body.userId)
   Profile.findOne({ _id: req.body.userId })
-    .then(profile => res.status(200).json(profile.calo))
+    .then(profile => {res.status(200).json(profile.calo || null);})
     .catch(error => res.status(404).json({ error }))
 };
