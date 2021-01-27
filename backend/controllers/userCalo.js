@@ -8,17 +8,16 @@ exports.addCalo = (req, res, next) => {
       console.log('['+profile+']')
       if(profile){
         Profile.updateOne( //j'ajoute les caloris si  une as dejas ete enregistrer aujourdhuis 
-          { email: req.body.email, calo: {$elemMatch: {date: now}} },
+          { _id: req.body.userId, calo: {$elemMatch: {date: now}} },
           { $inc: { "calo.$.calo" : Number(req.body.calo)}}
         )
           .then(() => res.status(200).json('poids modifier'))
-          .catch(error => console.log(error) )
+          .catch(error => res.status(404).json({ error }) )
         }
       else
-      console.log('')
         Profile.updateOne( //je set la premier calorie du jours
           { _id: req.body.userId }, 
-          { $set: {calo: {"date" : now,"calo" : Number(req.body.calo)}}})
+          { $push: {calo: {"date" : now,"calo" : Number(req.body.calo)}}})
           .then(() => res.status(200).json('poids ajouter'))
           .catch(error => res.status(404).json({ error }))
     })
