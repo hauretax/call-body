@@ -12,5 +12,6 @@ router.post('/weight', auth, weightCtrl.showWeight)
 router.post('/addcalo', auth, caloCtrl.addCalo)
 router.post('/calo', auth, caloCtrl.showcalo)
 router.post('/change', auth, profileCtrl.modifyUser)
+router.post('/show', auth, profileCtrl.getBodyValue)
 
 module.exports = router;

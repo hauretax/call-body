@@ -13,7 +13,28 @@ exports.modifyUser = (req, res, next) =>{
     }
     case 'calo':{
       Profile.updateOne({ _id: req.body.userId}, 
-        {calo: req.body.nb})
+        {caloGoal : req.body.nb})
+      .then(() => res.status(200).json({message: 'objet modifier'}))
+      .catch(error => res.status(400).json({ error }))
+      break;
+    }
+    case 'tauxg':{
+      Profile.updateOne({ _id: req.body.userId}, 
+        {tauxg : req.body.nb})
+      .then(() => res.status(200).json({message: 'objet modifier'}))
+      .catch(error => res.status(400).json({ error }))
+      break;
+    }
+    case 'multa':{
+      Profile.updateOne({ _id: req.body.userId}, 
+        {multa : req.body.nb})
+      .then(() => res.status(200).json({message: 'objet modifier'}))
+      .catch(error => res.status(400).json({ error }))
+      break;
+    }
+    case 'pertp':{
+      Profile.updateOne({ _id: req.body.userId}, 
+        {pertp : req.body.nb})
       .then(() => res.status(200).json({message: 'objet modifier'}))
       .catch(error => res.status(400).json({ error }))
       break;
@@ -21,13 +42,19 @@ exports.modifyUser = (req, res, next) =>{
   }
 };
 
-/*
-exports.showUser = (req,res,next) =>{
-    Profile.findOne({ _id: req.params.id })
-      .then(profile => res.status(200).json(profile))
+exports.getBodyValue = (req,res,next) =>{
+    Profile.findOne({ _id: req.body.userId })
+      .then(profile => {res.status(200).json({
+        cGoal : profile.caloGoal, 
+        wGoal : profile.goal,
+        tauxG : profile.tauxg,
+        multA : profile.multa,
+        pertP : profile.pertp 
+      }|| null);})
       .catch(error => res.status(404).json({ error }))
 };
 
+/*
 exports.showAllUser = (req, res, next) => {
     Profile.find()
       .then(profile => res.status(200).json(profile))
