@@ -33,7 +33,8 @@ exports.login = (req, res, next) => {
                             { userId: user._id },
                             'cleDeDev',
                             { expiresIn : '24h'}
-                        )
+                        ),
+                        profile: user
                     })
                 })
                 .catch(error => res.statu(500).json({ error }))
