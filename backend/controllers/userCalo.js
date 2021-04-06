@@ -10,14 +10,14 @@ exports.addCalo = (req, res, next) => {
           { _id: req.body.userId, calo: { $elemMatch: { date: now } } },
           { $inc: { "calo.$.calo": Number(req.body.calo) } }
         )
-          .then(() => res.status(200).json('poids modifier'))
+          .then(() => res.status(200).json(profile.calo[profile.calo.length - 1]))
           .catch(error => res.status(404).json({ error }))
       }
       else
         Profile.updateOne( //je set la premier calorie du jours
           { _id: req.body.userId },
           { $push: { calo: { "date": now, "calo": Number(req.body.calo) } } })
-          .then(() => res.status(200).json('poids ajouter'))
+          .then(() => res.status(200).json(profile.calo[profile.calo.length - 1]))
           .catch(error => res.status(404).json({ error }))
     })
     .catch(error => console.log('usercalo say : ' + error))
